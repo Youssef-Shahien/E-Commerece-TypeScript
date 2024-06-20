@@ -1,0 +1,8 @@
+{
+  "accessibility.signals.positionHasError": {
+    "sound": "off"
+  },
+  "accessibility.signals.progress": {
+    "sound": "off"
+  }
+}
