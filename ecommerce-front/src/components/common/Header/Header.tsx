@@ -1,4 +1,5 @@
-import {HeaderBasket} from "../../eCommerece";
+import { NavLink } from "react-router-dom";
+import { HeaderBasket } from "../../eCommerece";
 import { Badge, Navbar, Nav, Container } from "react-bootstrap";
 
 import styles from "./styles.module.css";
@@ -23,13 +24,13 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="categories">Categories</Nav.Link>
-              <Nav.Link href="about-us">AboutUS</Nav.Link>
+              <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+              <Nav.Link as={NavLink} to="categories">Categories</Nav.Link>
+              <Nav.Link as={NavLink} to="about-us">AboutUS</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link href="login">Login</Nav.Link>
-              <Nav.Link href="register">Register</Nav.Link>
+              <Nav.Link as={NavLink} to="login">Login</Nav.Link>
+              <Nav.Link as={NavLink} to="register">Register</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
