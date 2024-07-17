@@ -7,6 +7,7 @@ import {
 import { Container, Row, Col } from "react-bootstrap";
 import { Product } from "@components/eCommerece";
 import { useParams } from "react-router-dom";
+import { Loading } from "@components/feedback";
 function Products() {
   const params = useParams();
   const { loading, error, records } = useAppSelector((state) => state.products);
@@ -34,7 +35,9 @@ function Products() {
 
   return (
     <Container>
-      <Row>{productsList}</Row>
+      <Loading status={loading} error={error}>
+        <Row>{productsList}</Row>
+      </Loading>
     </Container>
   );
 }

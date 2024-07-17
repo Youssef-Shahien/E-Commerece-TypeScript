@@ -4,6 +4,7 @@ import { actGetCategories } from "@store/categories/categoriesSlice";
 //
 import { Container, Row, Col } from "react-bootstrap";
 import { Category } from "@components/eCommerece";
+import { Loading } from "@components/feedback";
 function Categories() {
   const dispatch = useAppDispatch();
   const { error, loading, records } = useAppSelector(
@@ -31,7 +32,9 @@ function Categories() {
   }, [dispatch, records]);
   return (
     <Container>
-      <Row>{categoriesList}</Row>
+      <Loading status={loading} error={error}>
+        <Row>{categoriesList}</Row>
+      </Loading>
     </Container>
   );
 }
