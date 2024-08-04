@@ -4,27 +4,17 @@ import {
   actGetProductsByCatPrefix,
   productsCleanUp,
 } from "@store/products/productsSlice";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container} from "react-bootstrap";
 import { Product } from "@components/eCommerece";
 import { useParams } from "react-router-dom";
 import { Loading } from "@components/feedback";
+import { GridList } from "@components/common";
+import { TProduct } from "@customTypes/product";
 function Products() {
   const params = useParams();
   const { loading, error, records } = useAppSelector((state) => state.products);
   const dispatch = useAppDispatch();
-  const productsList =
-    records.length > 0
-      ? records.map((record) => (
-          <Col
-            key={record.id}
-            xs={6}
-            md={3}
-            className="d-flex justify-content-center mb-5 mt-2"
-          >
-            <Product {...record} />
-          </Col>
-        ))
-      : "There Are No Products";
+  
   useEffect(() => {
     dispatch(actGetProductsByCatPrefix(params.prefix as string));
 
@@ -36,7 +26,7 @@ function Products() {
   return (
     <Container>
       <Loading status={loading} error={error}>
-        <Row>{productsList}</Row>
+        <GridList records={records} renderItem={(record:TProduct)=> <Product {...record} />}/>
       </Loading>
     </Container>
   );
