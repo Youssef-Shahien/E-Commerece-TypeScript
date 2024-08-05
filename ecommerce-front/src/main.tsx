@@ -2,7 +2,9 @@ import ReactDOM from "react-dom/client";
 import AppRouter from "@routes/AppRouter";
 //redux
 import { Provider } from "react-redux";
-import { store , persistor} from "@store/index";
+import { store, persistor } from "@store/index";
+//axios
+import "./services/axios-global"
 //styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/global.css";

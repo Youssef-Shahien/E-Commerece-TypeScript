@@ -3,14 +3,15 @@ import styles from "./styles.module.css";
 import { TProduct } from "@customTypes/product";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@store/cart/cartSlice";
-import { useEffect, useState } from "react";
-const { product, productImg } = styles;
+import { memo, useEffect, useState } from "react";
+const { product, productImg, maximunNotice } = styles;
 
-const Product = ({ id, title, img, price }: TProduct) => {
+const Product = memo(({ id, title, img, price, max, quantity }: TProduct) => {
   const dispatch = useDispatch();
   //Handle add To Card Btn
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
-
+  const currentRemainingQuantity = max - (quantity ?? 0);
+  const quantityReachedToMax = currentRemainingQuantity <= 0 ? true : false;
   useEffect(() => {
     if (!isBtnDisabled) {
       return;
@@ -34,12 +35,21 @@ const Product = ({ id, title, img, price }: TProduct) => {
         <img src={img} alt={title} />
       </div>
       <h2 title={title}>{title}</h2>
-      <h3>{price} EGP</h3>
+      <p className={maximunNotice}>
+        {quantityReachedToMax ? (
+          "You Reach To The Limited"
+        ) : (
+          <>
+            You Can Add <span>{currentRemainingQuantity}</span> Item(s)
+          </>
+        )}
+      </p>
+      <h3>{price.toFixed(2)} EGP</h3>
       <Button
         variant="info"
         style={{ color: "white" }}
         onClick={addToCartHandler}
-        disabled={isBtnDisabled}
+        disabled={isBtnDisabled || quantityReachedToMax}
       >
         {isBtnDisabled ? (
           <>
@@ -52,6 +62,6 @@ const Product = ({ id, title, img, price }: TProduct) => {
       </Button>
     </div>
   );
-};
+});
 
 export default Product;

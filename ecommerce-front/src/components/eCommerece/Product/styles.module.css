@@ -28,3 +28,10 @@
   .product h3 {
     font-size: 13px;
   }
+  .maximunNotice {
+    font-size: 12px;
+    margin-bottom: 7px;
+  }
+  .maximunNotice span{
+    font-weight: bold;
+  }
